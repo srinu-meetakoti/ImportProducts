@@ -1,0 +1,16 @@
+package com.test.importproducts;
+
+rule "average"
+    salience 1
+    when 
+       $categories: Object() from accumulate(ip: ImportProduct(); 
+                                          collectSet(ip.getCategory()))
+       $category: String() from $categories
+       accumulate(ip : ImportProduct(category == $category);
+            $avgPrice: average(ip.getPrice()));
+    then
+        System.out.println("Category "+$category);
+        System.out.println("Price "+$avgPrice);
+        System.out.println("-------------------");
+end
+

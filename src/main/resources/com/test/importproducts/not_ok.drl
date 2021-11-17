@@ -1,0 +1,9 @@
+package com.test.importproducts;
+
+rule 'not_ok'
+    salience 2
+    when
+        $ip: ImportProduct( status!="OK" )
+    then
+        delete( $ip );
+end
